@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemaxi Portfolio</title>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --text: #ffffff;
+            --muted: #b4b6c3;
+            --card: #11131a;
+            --card-soft: #0f1218;
+            --border: rgba(255, 255, 255, 0.12);
+            --green: #10b981;
+            --blue: #6366f1;
+            --purple: #8b5cf6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text);
+            background: radial-gradient(circle at 12% 88%, rgba(139, 92, 246, 0.18), transparent 32%),
+                        radial-gradient(circle at 88% 10%, rgba(45, 212, 191, 0.14), transparent 28%),
+                        var(--bg);
+        }
+
+        .container {
+            width: min(1200px, 92vw);
+            margin: 0 auto;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav {
+            height: 86px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 28px;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+
+        .logo .name {
+            color: #60a5fa;
+            font-weight: 900;
+        }
+
+        .logo .dot {
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #d5d6df;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #d1d5db;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #050505;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 10px 18px;
+        }
+
+        .hero-center {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-bottom: 70px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .availability-badge {
+            margin: 0 auto 28px;
+            width: fit-content;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(12, 15, 22, 0.68);
+            color: #ecedf2;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.65);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(50px, 9vw, 96px);
+            line-height: 1.03;
+            letter-spacing: -1.3px;
+            font-weight: 900;
+            margin-bottom: 18px;
+        }
+
+        .hero-title .name-gradient {
+            background: linear-gradient(90deg, #7c8cff 0%, #9b8cff 45%, #6ee7f9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .hero-description {
+            margin: 0 auto 36px;
+            max-width: 600px;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.95;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #050505;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+            color: #ffffff;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.22);
+        }
+
+        .about {
+            padding: 72px 0 90px;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 5vw, 48px);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--muted);
+            margin-bottom: 34px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 26px;
+        }
+
+        .about-card {
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            padding: 26px;
+        }
+
+        .about-card p {
+            color: #d8dae2;
+            font-size: 16px;
+            line-height: 1.75;
+            margin-bottom: 20px;
+        }
+
+        .experience-chip {
+            border-radius: 16px;
+            border: 1px solid rgba(16, 185, 129, 0.36);
+            background: rgba(16, 185, 129, 0.07);
+            padding: 16px 18px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .experience-chip .num {
+            color: var(--green);
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .experience-chip .meta {
+            color: #e5e7eb;
+        }
+
+        .experience-chip .meta .line {
+            line-height: 1.32;
+            font-weight: 600;
+        }
+
+        .experience-chip .meta .tiny {
+            margin-top: 7px;
+            color: #9de9cd;
+            font-size: 13px;
+        }
+
+        .work-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .work-list {
+            list-style: none;
+            display: grid;
+            gap: 11px;
+        }
+
+        .work-item {
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            color: #e5e7eb;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .work-item.active {
+            border-color: rgba(16, 185, 129, 0.55);
+            background: rgba(16, 185, 129, 0.08);
+        }
+
+        .check {
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            border: 1px solid rgba(16, 185, 129, 0.8);
+            color: #34d399;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 980px) {
+            .nav-right {
+                gap: 18px;
+            }
+
+            .nav-links {
+                gap: 14px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                flex-wrap: wrap;
+                height: auto;
+                padding-top: 18px;
+                padding-bottom: 14px;
+                gap: 12px;
+            }
+
+            .nav-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .hero-center {
+                padding: 30px 0 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <header class="nav">
+                <div class="logo"><span class="name">name</span><span class="dot">.</span></div>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <a class="resume-btn" href="#">Resume</a>
+                </div>
+            </header>
+        </div>
+
+        <div class="container hero-center">
+            <div class="hero-content">
+                <div class="availability-badge">
+                    <span class="pulse-dot"></span>
+                    <span>Available for new opportunities</span>
+                </div>
+                <h1 class="hero-title">Hi, I'm <span class="name-gradient">Hemaxi</span></h1>
+                <h2 class="hero-subtitle">Backend Developer (php &amp; laravel)</h2>
+                <p class="hero-description">Building scalable APIs and reliable backend systems for modern web applications.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#projects">View Projects &rarr;</a>
+                    <a class="btn btn-gradient" href="#contact">Contact Me</a>
+                    <a class="btn btn-ghost" href="#resume">&#8595; Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">My journey and strengths as a backend developer.</p>
+
+            <div class="about-grid">
+                <article class="about-card">
+                    <p>Passionate backend developer focused on designing structured APIs, secure authentication systems, and efficient database-driven applications using Node.js, TypeScript, Express, and NestJS.</p>
+                    <div class="experience-chip">
+                        <span class="num">1</span>
+                        <div class="meta">
+                            <div class="line">Years of</div>
+                            <div class="line">Backend Experience</div>
+                            <div class="tiny">+ Internship Background</div>
+                        </div>
+                    </div>
+                </article>
+
+                <div>
+                    <h3 class="work-title">Why Work With Me ?</h3>
+                    <ul class="work-list">
+                        <li class="work-item active"><span class="check">✓</span> API architecture &amp; integration</li>
+                        <li class="work-item"><span class="check">✓</span> Database design and optimization</li>
+                        <li class="work-item"><span class="check">✓</span> Backend performance improvements</li>
+                        <li class="work-item"><span class="check">✓</span> Authentication &amp; security implementation</li>
+                        <li class="work-item"><span class="check">✓</span> Clean modular backend structure (NestJS architecture)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
