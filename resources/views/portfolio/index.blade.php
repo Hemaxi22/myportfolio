@@ -31,9 +31,36 @@
         ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+     <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        violet: { 300: '#c4b5fd', 400: '#a78bfa', 500: '#8b5cf6' }
+                    }
+                }
+            }
+        }
+    </script>
+ 
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+ 
+
     <style>
         :root { color-scheme: dark; }
         html, body { background: #000 !important; }
+          /* Glass card utility */
+        .glass-card { border-radius: 18px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); backdrop-filter: blur(12px); }
+ 
+         /* Particles */
+        #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .particle { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: rgba(139,92,246,0.5); animation: particleFloat linear infinite; }
+        @keyframes particleFloat { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100px) rotate(720deg); opacity: 0; } }
+ 
         .exact-nav-wrap { width: min(1200px, 92vw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
         .exact-logo { font-size: 22px; font-weight: 600; letter-spacing: -0.4px; text-decoration: none; line-height: 1; }
         .exact-logo .name-text { background: linear-gradient(90deg, #7c8cff, #9d86ff, #7dd3fc);
@@ -77,6 +104,19 @@
             67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; transform: translate(-4vw, 3vh) scale(0.9); }
         }
 
+          @keyframes morph {
+            0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; transform: translate(0, 0) scale(1); }
+            34% { border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%; transform: translate(5vw, 5vh) scale(1.1); }
+            50% { transform: translate(3vw, -2vh) scale(1); }
+            67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; transform: translate(-4vw, 3vh) scale(0.9); }
+        }
+        .hero-bg-blob { position: absolute; width: 600px; height: 600px; background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(168,85,247,0.12)); filter: blur(100px); z-index: -1; animation: morph 20s ease-in-out infinite; }
+        .hero-bg-blob-1 { top: -10%; left: -10%; }
+        .hero-bg-blob-2 { bottom: -10%; right: -10%; animation-delay: -7s; }
+ 
+        .typing-cursor { display: inline-block; width: 2px; height: 0.8em; background-color: #8b5cf6; margin-left: 2px; animation: blink 1s step-end infinite; vertical-align: middle; }
+        @keyframes blink { from, to { opacity: 1; } 50% { opacity: 0; } }
+        
         .hero-bg-blob {
             position: absolute;
             width: 600px;
@@ -628,7 +668,7 @@
 
         <section id="contact" class="section-wrap mt-5" data-aos="fade-up">
             <h2 class="section-title text-center">Get in Touch</h2>
-            <p class="section-subtitle text-sm uppercase tracking-widest text-violet-300">Let's connect. I'm open to discussing backend opportunities.</p>
+            <p class="section-subtitle text-sm uppercase tracking-widest text-violet-300">Let's connect. I'm open to discussing new opportunities.</p>
             <div class="contact-center-wrap">
                 <div class="contact-shell glass-card">
                     <div class="contact-left">
