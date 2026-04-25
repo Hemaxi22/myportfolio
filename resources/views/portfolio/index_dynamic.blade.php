@@ -272,7 +272,7 @@
                 @foreach (['about' => 'About', 'skills' => 'Skills', 'projects' => 'Projects', 'experience' => 'Experience', 'contact' => 'Contact'] as $id => $label)
                     <a href="#{{ $id }}" class="nav-link">{{ $label }}</a>
                 @endforeach
-                <a href="{{ asset('files/resume/hemaxi-rathod-resume.pdf') }}" class="exact-resume" download>Resume</a>
+                <a href="{{ $resumePath ? asset($resumePath) : '#resume' }}" class="exact-resume" download>Resume</a>
             </div>
         </nav>
     </header>
@@ -299,7 +299,7 @@
                 <div class="exact-hero-cta">
                     <a href="#projects" class="exact-btn exact-btn-primary">View Projects &rarr;</a>
                     <a href="#contact" class="exact-btn exact-btn-gradient">Contact Me</a>
-                    <a href="{{ asset('files/resume/hemaxi-rathod-resume.pdf') }}" class="exact-btn exact-btn-ghost inline-flex items-center gap-2" download>
+                    <a href="{{ $resumePath ? asset($resumePath) : '#resume' }}" class="exact-btn exact-btn-ghost inline-flex items-center gap-2" download>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                             <polyline points="7 10 12 15 17 10"></polyline>
@@ -472,122 +472,77 @@
             <h2 class="section-title text-center">Featured Projects</h2>
             <p class="section-subtitle text-sm uppercase tracking-widest text-violet-300">A selection of my backend-focused work</p>
             <div class="project-grid grid gap-6 md:grid-cols-2">
-                {{-- Static Projects (Temporarily replacing dynamic loop for static hosting) --}}
-                <article class="project-card glass-card p-6">
-                    <div class="project-title-row">
-                        <svg class="project-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
-                        <h3 class="text-xl font-semibold">NettPage</h3>
-                    </div>
-                    <p class="project-desc">NettPage includes a structured main admin panel and a dedicated brand panel for content and business control.</p>
-                    <ul class="project-list space-y-3">
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Built role-based flows for main admin and brand panel users.</span>
-                        </li>
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Managed module-level permissions and structured dashboard controls.</span>
-                        </li>
-                    </ul>
-                    <div class="project-tech flex flex-wrap gap-2">
-                        <span class="project-tech-item">Laravel</span>
-                        <span class="project-tech-item">MySQL</span>
-                        <span class="project-tech-item">Bootstrap</span>
-                    </div>
-                </article>
+                @foreach ($projects as $project)
+                    @php
+                        $titleKey = strtolower($project->title ?? '');
+                        $customDescription = $project->description;
+                        $projectHighlights = [
+                            'Implemented feature enhancements and stable module architecture.',
+                            'Improved operations, maintainability, and usability.',
+                            'Focused on scalable and secure Laravel development patterns.',
+                        ];
 
-                <article class="project-card glass-card p-6">
-                    <div class="project-title-row">
-                        <svg class="project-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
-                        <h3 class="text-xl font-semibold">Suttle Service</h3>
-                    </div>
-                    <p class="project-desc">Suttle Service is a route bus management application for handling trips, schedules, and route operations.</p>
-                    <ul class="project-list space-y-3">
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Implemented route and schedule management workflows.</span>
-                        </li>
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Streamlined transport operations with admin-focused controls.</span>
-                        </li>
-                    </ul>
-                    <div class="project-tech flex flex-wrap gap-2">
-                        <span class="project-tech-item">PHP</span>
-                        <span class="project-tech-item">Laravel</span>
-                        <span class="project-tech-item">AWS</span>
-                    </div>
-                </article>
-
-                <article class="project-card glass-card p-6">
-                    <div class="project-title-row">
-                        <svg class="project-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
-                        <h3 class="text-xl font-semibold">Weapplinse</h3>
-                    </div>
-                    <p class="project-desc">Weapplinse project focused on web design quality and SEO-friendly implementation for better discoverability.</p>
-                    <ul class="project-list space-y-3">
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Improved UI structure with cleaner and responsive layouts.</span>
-                        </li>
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Applied SEO best practices for metadata and page structure.</span>
-                        </li>
-                    </ul>
-                    <div class="project-tech flex flex-wrap gap-2">
-                        <span class="project-tech-item">HTML/CSS</span>
-                        <span class="project-tech-item">JavaScript</span>
-                        <span class="project-tech-item">SEO</span>
-                    </div>
-                </article>
-
-                <article class="project-card glass-card p-6">
-                    <div class="project-title-row">
-                        <svg class="project-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
-                        <h3 class="text-xl font-semibold">BAPS Maintenance</h3>
-                    </div>
-                    <p class="project-desc">BAPS Maintenance app is focused on encrypted data handling and secure AWS-backed operations.</p>
-                    <ul class="project-list space-y-3">
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Managed encrypted database records for sensitive app data.</span>
-                        </li>
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Integrated AWS services for secure and stable deployment.</span>
-                        </li>
-                    </ul>
-                    <div class="project-tech flex flex-wrap gap-2">
-                        <span class="project-tech-item">Laravel</span>
-                        <span class="project-tech-item">AWS</span>
-                        <span class="project-tech-item">Encryption</span>
-                    </div>
-                </article>
-
-                <article class="project-card glass-card p-6">
-                    <div class="project-title-row">
-                        <svg class="project-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
-                        <h3 class="text-xl font-semibold">Inherit</h3>
-                    </div>
-                    <p class="project-desc">Inherit is a will-document management platform with PDF integration and dynamic multi-step forms.</p>
-                    <ul class="project-list space-y-3">
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Built dynamic form flow for structured legal document submission.</span>
-                        </li>
-                        <li class="project-point">
-                            <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-                            <span>Integrated PDF generation and processing for will documents.</span>
-                        </li>
-                    </ul>
-                    <div class="project-tech flex flex-wrap gap-2">
-                        <span class="project-tech-item">Laravel</span>
-                        <span class="project-tech-item">PDF Lib</span>
-                        <span class="project-tech-item">MySQL</span>
-                    </div>
-                </article>
-                {{-- End Static Projects --}}
+                        if (str_contains($titleKey, 'nettpage')) {
+                            $customDescription = 'NettPage includes a structured main admin panel and a dedicated brand panel for content and business control.';
+                            $projectHighlights = [
+                                'Built role-based flows for main admin and brand panel users.',
+                                'Managed module-level permissions and structured dashboard controls.',
+                                'Improved panel usability for faster day-to-day operations.',
+                            ];
+                        } elseif (str_contains($titleKey, 'weapplinse')) {
+                            $customDescription = 'Weapplinse project focused on web design quality and SEO-friendly implementation for better discoverability.';
+                            $projectHighlights = [
+                                'Improved UI structure with cleaner and responsive layouts.',
+                                'Applied SEO best practices for metadata and page structure.',
+                                'Optimized performance and readability for better user engagement.',
+                            ];
+                        } elseif (str_contains($titleKey, 'suttle') || str_contains($titleKey, 'shuttle')) {
+                            $customDescription = 'Suttle Service is a route bus management application for handling trips, schedules, and route operations.';
+                            $projectHighlights = [
+                                'Implemented route and schedule management workflows.',
+                                'Designed reliable booking and route tracking modules.',
+                                'Streamlined transport operations with admin-focused controls.',
+                            ];
+                        } elseif (str_contains($titleKey, 'baps') && str_contains($titleKey, 'maint')) {
+                            $customDescription = 'BAPS Maintenance app is focused on encrypted data handling and secure AWS-backed operations.';
+                            $projectHighlights = [
+                                'Managed encrypted database records for sensitive app data.',
+                                'Integrated AWS services for secure and stable deployment workflows.',
+                                'Handled maintenance features with reliability and data safety in mind.',
+                            ];
+                        } elseif (str_contains($titleKey, 'inherit')) {
+                            $customDescription = 'Inherit is a will-document management platform with PDF integration and dynamic multi-step forms.';
+                            $projectHighlights = [
+                                'Built dynamic form flow for structured legal document submission.',
+                                'Integrated PDF generation and processing for will documents.',
+                                'Improved validation and workflow clarity for document accuracy.',
+                            ];
+                        }
+                    @endphp
+                    <article class="project-card glass-card p-6">
+                        <div class="project-title-row">
+                            <svg class="project-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                                <path d="M8 2v4M16 2v4M3 10h18"></path>
+                            </svg>
+                            <h3 class="text-xl font-semibold">{{ $project->title }}</h3>
+                        </div>
+                        <p class="project-desc">{{ $customDescription }}</p>
+                        <ul class="project-list space-y-3">
+                            @foreach ($projectHighlights as $highlight)
+                                <li class="project-point">
+                                    <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+                                    <span>{{ $highlight }}</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <div class="project-tech flex flex-wrap gap-2">
+                            @foreach ($project->tech_stack ?? [] as $tech)
+                                <span class="project-tech-item">{{ $tech }}</span>
+                            @endforeach
+                        </div>
+                    </article>
+                @endforeach
             </div>
         </section>
 
