@@ -559,13 +559,15 @@
                         </div>
                     </div>
  
-                    <!-- Netlify Form — works automatically on Netlify -->
-                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form-wrap" id="contact-form" style="display:flex;flex-direction:column;gap:16px;">
-                        <input type="hidden" name="form-name" value="contact">
-                        <p style="display:none;"><label>Don't fill this: <input name="bot-field"></label></p>
- 
-                        <div id="form-success" class="form-success">✅ Message sent! I'll get back to you soon.</div>
-                        <div id="form-error" class="form-error">❌ Something went wrong. Please try again.</div>
+                    <!-- FormSubmit.co — sends beautiful HTML emails for static sites -->
+                    <form action="https://formsubmit.co/hemaxirathod131@gmail.com" method="POST" class="contact-form-wrap" id="contact-form" style="display:flex;flex-direction:column;gap:16px;">
+                        <!-- Configuration -->
+                        <input type="hidden" name="_subject" value="New Portfolio Inquiry!">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                         
+                        <div id="form-success" class="form-success"> Message sent! I'll get back to you soon.</div>
+                        <div id="form-error" class="form-error">Something went wrong. Please try again.</div>
  
                         <div style="display:flex;flex-direction:column;gap:6px;">
                             <label for="contact-name" style="font-size:14px;color:#cbd5e1;">Your Name</label>
@@ -690,17 +692,24 @@
             btnText.textContent = 'Sending...';
             successEl.style.display = 'none';
             errorEl.style.display = 'none';
+            
+            const formData = new FormData(form);
+
             try {
-                const res = await fetch('/', {
+                const res = await fetch(form.action, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(new FormData(form)).toString()
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
                 });
                 if (res.ok) {
                     successEl.style.display = 'block';
                     form.reset();
-                } else { throw new Error(); }
-            } catch {
+                } else {
+                    throw new Error();
+                }
+            } catch (err) {
                 errorEl.style.display = 'block';
             }
             btnText.textContent = 'Send Message';
