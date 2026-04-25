@@ -183,7 +183,24 @@
         @media (max-width: 900px) {
             .exact-nav-wrap { width: 94vw; }
             .exact-about-grid { grid-template-columns: 1fr; }
-            .exact-nav-links { gap: 14px; }
+            .exact-nav-links { display: none; } /* Hide regular links */
+            .exact-nav-links.mobile-active { 
+                display: flex; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 70px; 
+                left: 0; 
+                width: 100%; 
+                background: rgba(0,0,0,0.95); 
+                padding: 30px; 
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                backdrop-blur: 20px;
+                gap: 20px;
+                align-items: center;
+                z-index: 100;
+            }
+            .mobile-menu-toggle { display: block !important; }
+            
             .timeline-track { padding-left: 26px; }
             .timeline-track::before { left: 6px; }
             .timeline-dot { left: -25px; }
@@ -192,12 +209,41 @@
             .contact-shell { grid-template-columns: 1fr; }
             .contact-left { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.1); padding: 24px; }
             .contact-form-wrap { padding: 24px; }
-            .contact-email-text { font-size: 22px; }
-            .contact-link-icon-wrap { width: 58px; height: 58px; }
+            .contact-email-text { font-size: 18px; word-break: break-all; }
+            .contact-link-icon-wrap { width: 50px; height: 50px; }
             .contact-link-row svg { width: 22px; height: 22px; }
-            .contact-linkedin-row { width: 58px; }
-            .contact-linkedin-row .contact-link-icon-wrap { width: 58px; height: 58px; }
+            .contact-linkedin-row { width: 50px; }
+            
         }
+
+        @media (max-width: 640px) {
+            .exact-hero { padding: 40px 0; min-height: auto; }
+            .exact-hero-title { font-size: 42px; }
+            .exact-hero-subtitle { font-size: 20px; }
+            .exact-hero-desc { font-size: 16px; }
+            .exact-hero-cta { width: 100%; }
+            .exact-hero-cta .exact-btn { width: fit-content; text-align: center; justify-content: center; }
+            .section-wrap { padding: 60px 0; }
+            .section-title { font-size: 28px; }
+            .exact-about-card { padding: 20px; }
+            .exact-exp-num { font-size: 36px; }
+            .project-card { padding: 20px; }
+            .edu-card { padding: 15px; }
+            main{
+                padding:20px;
+            }
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+        }
+
         .section-wrap{
             padding:90px 0;
         }
@@ -215,7 +261,14 @@
             <a href="#hero" class="exact-logo">
                 <span class="name-text">Hemaxi Rathod</span><span class="dot-text"></span>
             </a>
-            <div class="exact-nav-links">
+            <button id="mobile-toggle" class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <div class="exact-nav-links" id="nav-menu">
                 @foreach (['about' => 'About', 'skills' => 'Skills', 'projects' => 'Projects', 'experience' => 'Experience', 'contact' => 'Contact'] as $id => $label)
                     <a href="#{{ $id }}" class="nav-link">{{ $label }}</a>
                 @endforeach

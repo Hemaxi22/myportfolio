@@ -126,22 +126,39 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    backToTop?.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    // Mobile Menu Toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (mobileToggle && navMenu) {
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-active');
+        });
+
+        // Close menu when clicking a link
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('mobile-active');
+            });
+        });
+    }
 
     // Smooth Mouse Interaction
     const cursorGlow = document.querySelector('.cursor-glow');
     const heroContent = document.querySelector('#hero [data-aos]');
     
     window.addEventListener('mousemove', (event) => {
-        if (cursorGlow) {
+        // Only show/move cursor glow if it's a mouse-driven device
+        if (cursorGlow && window.matchMedia('(pointer: fine)').matches) {
             gsap.to(cursorGlow, {
                 duration: 0.8,
                 left: event.clientX,
                 top: event.clientY,
-                ease: 'power2.out'
+                ease: 'power2.out',
+                opacity: 1
             });
+        } else if (cursorGlow) {
+            cursorGlow.style.opacity = '0';
         }
 
         if (heroContent) {
