@@ -287,6 +287,21 @@
         .section-wrap{
             padding:90px 0;
         }
+        .project-playstore-link{
+            display:inline-block;
+            margin-top:10px;
+            padding:8px 14px;
+            background:#000;
+            color:#fff;
+            border-radius:6px;
+            text-decoration:none;
+            font-size:14px;
+            transition:0.3s;
+        }
+
+        .project-playstore-link:hover{
+            background:#333;
+        }
     </style>
 </head>
 <body class="premium-bg bg-black text-white selection:bg-violet-500/50">
@@ -541,7 +556,13 @@
                         <svg class="project-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
                         <h3 class="text-xl font-semibold">Suttle Service</h3>
                     </div>
-                    <p class="project-desc">Suttle Service is a route bus management application for handling trips, schedules, and route operations.</p>
+                    <p class="project-desc">
+                        Suttle Service is a route bus management application for handling trips, schedules, and route operations.
+                    </p>
+
+                    <a href="YOUR_PLAYSTORE_LINK_HERE" target="_blank" class="project-playstore-link">
+                        View on Play Store
+                    </a>
                     <ul class="project-list space-y-3">
                         <li class="project-point">
                             <svg class="project-point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
